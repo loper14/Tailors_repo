@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-
+import React from "react";
 import { Wrapper } from "./style";
 import { Title } from "../../Generic/Style";
 import Calendar from "../../Generic/Calendar";

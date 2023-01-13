@@ -1,9 +1,8 @@
-import { Avatar, Button, Form, Modal } from "antd";
+import { Avatar, Form, Modal } from "antd";
 import React from "react";
 import { Wrapper } from "./style.js";
 import { useAuthUser } from "react-auth-kit";
 const UserModal = ({ open, cancel }) => {
-  let colors = ["greenyellow", "green", "yellow", "blue", "orange", "skyblue"];
   let user = useAuthUser();
   return (
     <Modal

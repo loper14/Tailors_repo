@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Wrapper } from "./style";
-import navbarImg from "../../Assets/images/navbarLogo.jpg";
 import Logo from "../../Assets/images/logo.jpg";
 import { Avatar } from "antd";
 import { Outlet, Link, useNavigate } from "react-router-dom";
@@ -9,7 +8,7 @@ import { CgLogOut } from "react-icons/cg";
 import { Dropdown } from "antd";
 import UserModal from "../../Components/userModal";
 import { ExclamationCircleFilled } from "@ant-design/icons";
-import { Button, Modal, Space } from "antd";
+import { Modal } from "antd";
 import { useSignOut, useAuthUser } from "react-auth-kit";
 const { confirm } = Modal;
 

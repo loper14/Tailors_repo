@@ -3,10 +3,8 @@ import React, { useState } from "react";
 import { Title } from "../Style";
 import { Wrapper } from "./style";
 import { BsFillCaretLeftFill, BsFillCaretRightFill } from "react-icons/bs";
-import { useParams } from "react-router-dom";
 
 const Calendar = ({ date }) => {
-  let { flowDate } = useParams();
   let [paramsDate, setParamsDate] = useState(date.getTime());
   let [showDate, setShowDate] = useState(false);
   let startDate = 1668970800000;

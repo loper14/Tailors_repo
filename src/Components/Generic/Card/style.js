@@ -21,8 +21,8 @@ Wrapper.CardItem = styled.div`
     padding: 5px 35px;
   }
 
-  @media (max-width: 350px) {
-    padding: 5px 15px;
+  @media (max-width: 370px) {
+    padding: 5px 25px;
   }
 `;
 Wrapper.CardTitle = styled.div`
@@ -54,5 +54,9 @@ Wrapper.CardImg = styled.img`
   @media (max-width: 500px) {
     width: 90px;
     height: 140px;
+  }
+  @media (max-width: 370px) {
+    width: 80px;
+    height: 100px;
   }
 `;
