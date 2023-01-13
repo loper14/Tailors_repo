@@ -22,7 +22,7 @@ Wrapper.CardItem = styled.div`
   }
 
   @media (max-width: 370px) {
-    padding: 5px 25px;
+    padding: 5px 65px;
   }
 `;
 Wrapper.CardTitle = styled.div`
