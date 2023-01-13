@@ -17,12 +17,15 @@ Wrapper.CardItem = styled.div`
   padding: ${({ isFlowCard }) => (isFlowCard ? "15px 110px" : "10px 50px")};
   margin-bottom: 20px;
   gap: 10px;
-  @media (max-width: 500px) {
-    padding: 5px 35px;
+  @media (max-width: 800px) {
+    padding: ${({ isFlowCard }) => (isFlowCard ? "5px 175px" : "5px 35px")};
+  }
+  @media (max-width: 550px) {
+    padding: ${({ isFlowCard }) => (isFlowCard ? "5px 105px" : "5px 35px")};
   }
 
   @media (max-width: 370px) {
-    padding: 5px 65px;
+    padding: ${({ isFlowCard }) => (isFlowCard ? "5px 85px" : "5px 35px")};
   }
 `;
 Wrapper.CardTitle = styled.div`
