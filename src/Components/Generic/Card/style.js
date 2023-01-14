@@ -27,6 +27,9 @@ Wrapper.CardItem = styled.div`
   @media (max-width: 370px) {
     padding: ${({ isFlowCard }) => (isFlowCard ? "5px 85px" : "5px 35px")};
   }
+  @media (max-width: 340px) {
+    padding: ${({ isFlowCard }) => (isFlowCard ? "5px 85px" : "5px 25px")};
+  }
 `;
 Wrapper.CardTitle = styled.div`
   font-family: "Inter";

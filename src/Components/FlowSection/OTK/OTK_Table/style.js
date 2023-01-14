@@ -5,7 +5,22 @@ export let Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   width: 100%;
+`;
+Wrapper.Wrap = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
+`;
+Wrapper.TableWrapper = styled.div`
+  @media (max-width: 500px) {
+    width: 80%;
+    overflow: auto;
+  }
+  @media (max-width: 350px) {
+    width: 70%;
+    overflow: auto;
+  }
 `;
 Wrapper.Table = styled.table`
   background-color: rgb(255, 255, 255);
