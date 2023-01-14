@@ -2,15 +2,29 @@ import styled from "styled-components";
 
 export let Wrapper = styled.div`
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   width: 100%;
+`;
+Wrapper.Wrap = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
+`;
+Wrapper.TableWrapper = styled.div`
+  @media (max-width: 600px) {
+    width: 60%;
+    overflow: auto;
+  }
+  @media (max-width: 350px) {
+    width: 50%;
+    overflow: auto;
+  }
 `;
 Wrapper.Table = styled.table`
   background-color: rgb(255, 255, 255);
   border-radius: 12px;
-  /* font-family: Roboto, sans-serif; */
 `;
 Wrapper.Thead = styled.thead``;
 Wrapper.Tbody = styled.tbody``;
