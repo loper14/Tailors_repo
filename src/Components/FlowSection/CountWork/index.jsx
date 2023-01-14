@@ -2,6 +2,7 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import Calendar from "../../Generic/Calendar";
 import { Title } from "../../Generic/Style";
+import CountWorkTable from "./CountWorkTable";
 
 const CountWork = () => {
   let d = new Date();
@@ -12,6 +13,7 @@ const CountWork = () => {
     <div>
       <Title>Count Work</Title>
       <Calendar date={date} />
+      <CountWorkTable />
     </div>
   );
 };

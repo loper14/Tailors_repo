@@ -57,7 +57,7 @@ const HomeComponent = () => {
       <Title>Store and Report</Title>
       <Wrapper.FlowsContainer>
         {" "}
-        <Card title="Store" img={storeImg} />
+        <Card onClick={() => navigate("/store")} title="Store" img={storeImg} />
         <Card title="Report" small={true} img={reportImg} />
       </Wrapper.FlowsContainer>
     </Wrapper>

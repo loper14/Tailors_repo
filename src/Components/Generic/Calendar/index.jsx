@@ -1,10 +1,15 @@
 import { DatePicker } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Title } from "../Style";
 import { Wrapper } from "./style";
-import { BsFillCaretLeftFill, BsFillCaretRightFill } from "react-icons/bs";
+import { ArrowLeftOutlined, ArrowRightOutlined } from "@ant-design/icons";
+import axios, { Axios } from "axios";
+import { useParams } from "react-router-dom";
+import { useAuthUser } from "react-auth-kit";
 
-const Calendar = ({ date }) => {
+const Calendar = ({ date, onDayChange }) => {
+  let auth = useAuthUser();
+  let { flowID } = useParams();
   let [paramsDate, setParamsDate] = useState(date.getTime());
   let [showDate, setShowDate] = useState(false);
   let startDate = 1668970800000;
@@ -17,19 +22,38 @@ const Calendar = ({ date }) => {
   let currentDate = new Date(paramsDate);
 
   let plusDay = () => {
-    setParamsDate(currentDate.setDate(currentDate.getDate() + 1));
+    let plusDayTime = currentDate.setDate(currentDate.getDate() + 1);
+    setParamsDate(plusDayTime);
+    onDayChange(plusDayTime);
   };
   let minusDay = () => {
-    setParamsDate(currentDate.setDate(currentDate.getDate() - 1));
+    let minusDayTime = currentDate.setDate(currentDate.getDate() - 1);
+    setParamsDate(minusDayTime);
+    onDayChange(minusDayTime);
   };
+
+  // useEffect(() => {
+  //   axios({
+  //     method: "POST",
+  //     url: `${process.env.REACT_APP_MAIN_URL}/merchants`,
+  //     data: { flowType: flowID, createDate: currentDate },
+  //     headers: {
+  //       Authorization: `${
+  //         auth()._auth_type
+  //       } eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjpbeyJfaWQiOiI2MzdiYTc3OTQ3MzY5ZDAxNjE1MmVmOTAiLCJwYXNzd29yZCI6ImZsb3cxIiwiZnVsbE5hbWUiOiJmbG93MSIsImZsb3dUeXBlIjoiMSJ9XSwiaWF0IjoxNjY5MDQ4NjA2fQ.zCoxl2EXfHNAn9Arzd5oWXAxiMwooYkIIkWjmwj7UU0`,
+  //     },
+  //   }).then((response) => console.log(response));
+  // }, [currentDate]);
+
   return (
     <div>
       <Wrapper>
-        <BsFillCaretLeftFill
+        <ArrowLeftOutlined
           onClick={minusDay}
-          size={"25px"}
+          style={{ fontSize: "25px" }}
           cursor="pointer"
         />
+
         <Title
           onClick={() => setShowDate(true)}
           style={{ userSelect: "none", cursor: "pointer" }}
@@ -40,7 +64,9 @@ const Calendar = ({ date }) => {
                 setShowDate(false);
               }}
               onChange={(e) => {
-                setParamsDate(new Date(e.$d).getTime());
+                let selectedDayTime = new Date(e.$d).getTime();
+                setParamsDate(selectedDayTime);
+                onDayChange(selectedDayTime);
               }}
               open={true}
               disabledDate={(value) => {
@@ -70,9 +96,9 @@ const Calendar = ({ date }) => {
             currentDate.getMonth() + 1
           }${currentDate.getFullYear()}`
         ) ? (
-          <BsFillCaretRightFill
+          <ArrowRightOutlined
             onClick={plusDay}
-            size={"25px"}
+            style={{ fontSize: "25px" }}
             cursor="pointer"
           />
         ) : (

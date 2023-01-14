@@ -3,8 +3,7 @@ import { Wrapper } from "./style";
 import Logo from "../../Assets/images/logo.jpg";
 import { Avatar } from "antd";
 import { Outlet, Link, useNavigate } from "react-router-dom";
-import { FiSettings } from "react-icons/fi";
-import { CgLogOut } from "react-icons/cg";
+import { SettingOutlined, LogoutOutlined } from "@ant-design/icons";
 import { Dropdown } from "antd";
 import UserModal from "../../Components/userModal";
 import { ExclamationCircleFilled } from "@ant-design/icons";
@@ -38,7 +37,7 @@ const Navbar = () => {
     {
       label: (
         <Wrapper.LabelContainer onClick={() => setModal(true)}>
-          <FiSettings size={"18px"} />
+          <SettingOutlined style={{ fontSize: "16px" }} />
           <Wrapper.LabelText>Settings</Wrapper.LabelText>
         </Wrapper.LabelContainer>
       ),
@@ -47,7 +46,7 @@ const Navbar = () => {
     {
       label: (
         <Wrapper.LabelContainer onClick={showPromiseConfirm}>
-          <CgLogOut color="red" size={"18px"} />
+          <LogoutOutlined style={{ fontSize: "16px", color: "red" }} />
           <Wrapper.LabelText isLogout={true}>Logout</Wrapper.LabelText>
         </Wrapper.LabelContainer>
       ),

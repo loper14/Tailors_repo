@@ -7,6 +7,7 @@ import NotFound from "../Pages/404";
 import { RequireAuth } from "react-auth-kit";
 import Flow from "../Components/Flow";
 import FlowSection from "../Components/FlowSection";
+import { routeData } from "../Utils/routes";
 
 const Root = () => {
   return (
@@ -20,12 +21,9 @@ const Root = () => {
             </RequireAuth>
           }
         >
-          <Route index element={<Home />} />
-          <Route path="/flow/:flowID" element={<Flow />} />
-          <Route
-            path="flow/:flowID/:flowSection/:flowDate"
-            element={<FlowSection />}
-          />
+          {routeData.map(({ path, Element, id }) => (
+            <Route key={id} path={path} element={<Element />} />
+          ))}
         </Route>
 
         <Route path="/login" element={<Login />} />
