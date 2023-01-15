@@ -29,6 +29,10 @@ Wrapper.NavbarLogo = styled.img`
     width: 170px;
     height: 45px;
   }
+  @media (max-width: 400px) {
+    width: 110px;
+    height: 50px;
+  }
 `;
 Wrapper.LabelContainer = styled.div`
   display: flex;

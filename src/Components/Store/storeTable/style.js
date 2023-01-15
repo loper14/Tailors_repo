@@ -7,23 +7,26 @@ export let Wrapper = styled.div`
   width: 100%;
 `;
 Wrapper.Wrap = styled.div`
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  @media (max-width: 500px) {
+    width: 100%;
+    overflow: auto;
+  }
 `;
 Wrapper.TableWrapper = styled.div`
-  @media (max-width: 600px) {
-    width: 60%;
+  @media (max-width: 500px) {
+    width: 90%;
     overflow: auto;
   }
   @media (max-width: 350px) {
-    width: 50%;
     overflow: auto;
   }
 `;
 Wrapper.Table = styled.table`
+  width: 100%;
   background-color: rgb(255, 255, 255);
   border-radius: 12px;
 `;
