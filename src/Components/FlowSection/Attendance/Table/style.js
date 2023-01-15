@@ -11,18 +11,22 @@ Wrapper.Wrap = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  @media (max-width: 500px) {
+    width: 100%;
+    overflow: auto;
+  }
 `;
 Wrapper.TableWrapper = styled.div`
   @media (max-width: 500px) {
-    width: 80%;
+    width: 90%;
     overflow: auto;
   }
   @media (max-width: 350px) {
-    width: 70%;
     overflow: auto;
   }
 `;
 Wrapper.Table = styled.table`
+  width: 100%;
   background-color: rgb(255, 255, 255);
   border-radius: 12px;
 `;
@@ -37,6 +41,9 @@ Wrapper.Th = styled.th`
   color: ${({ isDanger }) => (isDanger ? "rgb(211, 56, 13)" : "")};
   background: ${({ isDanger }) => (isDanger ? "rgb(255, 241, 232)" : "")};
   white-space: nowrap;
+  @media (max-width: 350px) {
+    font-size: 15px;
+  }
 `;
 Wrapper.Td = styled.td`
   padding: 7px 15px;
@@ -45,4 +52,7 @@ Wrapper.Td = styled.td`
   white-space: nowrap;
   color: ${({ isDanger }) => (isDanger ? "rgb(211, 56, 13)" : "")};
   background: ${({ isDanger }) => (isDanger ? "rgb(255, 241, 232)" : "")};
+  @media (max-width: 350px) {
+    font-size: 14px;
+  }
 `;

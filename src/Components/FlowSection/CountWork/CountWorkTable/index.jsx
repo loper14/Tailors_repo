@@ -1,10 +1,11 @@
 import { Button, Checkbox } from "antd";
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Wrapper } from "./style";
 import { OrderedListOutlined } from "@ant-design/icons";
 
 const CountWorkTable = () => {
+  let [check, setCheck] = useState();
   let navigate = useNavigate();
   let { flowDate, flowID } = useParams();
   return (
@@ -39,9 +40,12 @@ const CountWorkTable = () => {
                 <Wrapper.Tr>
                   <Wrapper.Td>1</Wrapper.Td>
                   <Wrapper.Td>
-                    <Checkbox />
+                    <Checkbox
+                      checked={check}
+                      onChange={() => setCheck(!check)}
+                    />
                   </Wrapper.Td>
-                  <Wrapper.Td>Alisherov Hamidullo</Wrapper.Td>
+                  <Wrapper.Td check={check}>Alisherov Hamidullo</Wrapper.Td>
                   <Wrapper.Td
                     style={{
                       background: "rgb(255, 241, 232)",
