@@ -1,3 +1,4 @@
+import Input from "antd/es/input/Input";
 import styled from "styled-components";
 
 export let Title = styled.div`
@@ -13,3 +14,15 @@ export let Title = styled.div`
     font-size: 24px;
   }
 `;
+export let Wrapper = styled.div`
+  padding-top: 10px;
+`;
+Wrapper.InputWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  grid-gap: 10px;
+`;
+Wrapper.Label = styled.div`
+  margin-top: 5px;
+`;
+Wrapper.Input = styled(Input)``;

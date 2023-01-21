@@ -2,13 +2,10 @@ import React, { useEffect, useState } from "react";
 import { Wrapper } from "./style";
 import { OrderedListOutlined } from "@ant-design/icons";
 import { Button, Checkbox } from "antd";
-import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-const Table = ({ data: propData, createDate, flowType }) => {
-  let navigate = useNavigate();
+const Table = ({ data: propData, createDate, flowType, open }) => {
   let [data, setData] = useState(propData);
   let [toggleChange, setToggleChange] = useState(false);
-  let { flowDate, flowID } = useParams();
 
   let updateById = (shouldUpdateDate) => {
     setData({
@@ -62,9 +59,6 @@ const Table = ({ data: propData, createDate, flowType }) => {
   return (
     <Wrapper>
       <Wrapper.Wrap>
-        <Button type="primary" style={{ margin: "25px 0" }}>
-          + Add worker
-        </Button>
         <Wrapper.TableWrapper>
           <Wrapper.Table>
             <Wrapper.Thead>
@@ -107,12 +101,6 @@ const Table = ({ data: propData, createDate, flowType }) => {
             </Wrapper.Tbody>
           </Wrapper.Table>
         </Wrapper.TableWrapper>
-        <Button
-          onClick={() => navigate(`/flow/${flowID}/countWork/${flowDate}`)}
-          style={{ margin: "25px 0" }}
-        >
-          Go to Count work
-        </Button>
       </Wrapper.Wrap>
     </Wrapper>
   );

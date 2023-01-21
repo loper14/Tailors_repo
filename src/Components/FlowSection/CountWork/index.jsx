@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import Calendar from "../../Generic/Calendar";
 import { Title } from "../../Generic/Style";
@@ -6,7 +6,6 @@ import CountWorkTable from "./CountWorkTable";
 
 const CountWork = () => {
   let { flowDate } = useParams();
-  let [changeDate, setChangeDate] = useState(Number(flowDate));
   let date = new Date(Number(flowDate));
   let onDayChangeHandler = (time) => {
     console.log(time);

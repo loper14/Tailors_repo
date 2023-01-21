@@ -1,98 +1,95 @@
+import React, { useState } from "react";
 import { DatePicker } from "antd";
-import React, { useEffect, useState } from "react";
-import { Title } from "../Style";
 import { Wrapper } from "./style";
-import { ArrowLeftOutlined, ArrowRightOutlined } from "@ant-design/icons";
-import axios, { Axios } from "axios";
-import { useParams } from "react-router-dom";
-import { useAuthUser } from "react-auth-kit";
-
+import { Title } from "../Style";
+import { ArrowRightOutlined, ArrowLeftOutlined } from "@ant-design/icons";
 const Calendar = ({ date, onDayChange }) => {
-  let auth = useAuthUser();
-  let { flowID } = useParams();
-  let [paramsDate, setParamsDate] = useState(date.getTime());
-  let [showDate, setShowDate] = useState(false);
-  let startDate = 1673290800000;
-  let setUpDate = new Date();
-  let visibleDate = new Date(
+  const startDate = process.env.REACT_APP_START_DATE;
+  const setUpDate = new Date();
+  const [paramsDate, setParamsDate] = useState(date.getTime());
+  const [showDate, setShowDate] = useState(true);
+  const visibleDate = new Date(
     `${setUpDate.getMonth() + 1}/${
       setUpDate.getDate() + 1
     }/${setUpDate.getFullYear()}`
   );
-  let currentDate = new Date(paramsDate);
 
-  let plusDay = () => {
-    let plusDayTime = currentDate.setDate(currentDate.getDate() + 1);
-    setParamsDate(plusDayTime);
-    onDayChange(plusDayTime);
-  };
-  let minusDay = () => {
-    let minusDayTime = currentDate.setDate(currentDate.getDate() - 1);
-    setParamsDate(minusDayTime);
-    onDayChange(minusDayTime);
-  };
+  const currentDate = new Date(paramsDate);
 
+  const minusDay = () => {
+    const minusDayChange = currentDate.setDate(currentDate.getDate() - 1);
+    setParamsDate(minusDayChange);
+    onDayChange(minusDayChange);
+  };
+  const plusDay = () => {
+    const plusDayChange = currentDate.setDate(currentDate.getDate() + 1);
+    setParamsDate(plusDayChange);
+    onDayChange(plusDayChange);
+  };
   return (
-    <div>
-      <Wrapper>
+    <Wrapper>
+      {startDate <
+      new Date(
+        `${
+          currentDate.getMonth() + 1
+        }/${currentDate.getDate()}/${currentDate.getFullYear()}`
+      ).getTime() ? (
         <ArrowLeftOutlined
           onClick={minusDay}
-          style={{ fontSize: "25px" }}
-          cursor="pointer"
+          style={{ fontSize: "22px", cursor: "pointer" }}
         />
-
-        <Title
-          onClick={() => setShowDate(true)}
-          style={{ userSelect: "none", cursor: "pointer" }}
-        >
-          {showDate ? (
-            <DatePicker
-              onOpenChange={(e) => {
-                setShowDate(false);
-              }}
-              onChange={(e) => {
-                let selectedDayTime = new Date(e.$d).getTime();
-                setParamsDate(selectedDayTime);
-                onDayChange(selectedDayTime);
-              }}
-              open={true}
-              disabledDate={(value) => {
-                let antDate = new Date(value.$d);
-                if (startDate < antDate && visibleDate.getTime() > antDate) {
-                  return false;
-                }
-                return true;
-              }}
-            />
-          ) : (
-            currentDate.toLocaleDateString("ru-Ru", {
-              month: "numeric",
-              year: "numeric",
-              day: "numeric",
-            })
-          )}
-        </Title>
-
-        {Number(
-          `${setUpDate.getDate()}.${
-            setUpDate.getMonth() + 1
-          }${setUpDate.getFullYear()}`
-        ) >
-        Number(
-          `${currentDate.getDate()}.${
-            currentDate.getMonth() + 1
-          }${currentDate.getFullYear()}`
-        ) ? (
-          <ArrowRightOutlined
-            onClick={plusDay}
-            style={{ fontSize: "25px" }}
-            cursor="pointer"
-          />
+      ) : (
+        ""
+      )}
+      <Title style={{ cursor: "pointer" }} onClick={() => setShowDate(false)}>
+        {showDate ? (
+          currentDate.toLocaleDateString(`ru-RU`, {
+            year: "numeric",
+            month: "numeric",
+            day: "numeric",
+          })
         ) : (
-          ""
-        )}
-      </Wrapper>
-    </div>
+          <DatePicker
+            open={!showDate}
+            onOpenChange={() => {
+              setShowDate(true);
+            }}
+            onSelect={(e) => {
+              const selectedDate = e.$d.getTime();
+              setParamsDate(selectedDate);
+              onDayChange(selectedDate);
+            }}
+            disabledDate={(value) => {
+              const antdDate = new Date(value.$d);
+              if (
+                startDate < antdDate.getTime() &&
+                visibleDate.getTime() > antdDate.getTime()
+              ) {
+                return false;
+              }
+              return true;
+            }}
+          />
+        )}{" "}
+      </Title>
+      {Number(
+        `${setUpDate.getDate()}.${
+          setUpDate.getMonth() + 1
+        }${setUpDate.getFullYear()}`
+      ) >
+      Number(
+        `${currentDate.getDate()}.${
+          currentDate.getMonth() + 1
+        }${currentDate.getFullYear()}`
+      ) ? (
+        <ArrowRightOutlined
+          onClick={plusDay}
+          style={{ fontSize: "22px", cursor: "pointer" }}
+        />
+      ) : (
+        ""
+      )}
+    </Wrapper>
   );
 };
 

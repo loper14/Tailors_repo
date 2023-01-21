@@ -5,19 +5,15 @@ import CountWork from "./CountWork";
 import OTK from "./OTK";
 const FlowSection = () => {
   let { flowSection } = useParams();
-  // let data = [
-  //   { id: 1, component: "Attendances" },
-  //   { id: 2, component: "countWork" },
-  //   { id: 3, component: "OTK" },
-  // ];
+  let flowSectionData = [
+    { name: "attendance", Component: Attendance, id: 0 },
+    { name: "countWork", Component: CountWork, id: 1 },
+    { name: "OTK", Component: OTK, id: 2 },
+  ];
   return (
     <div>
-      {flowSection === "attendance" ? (
-        <Attendance />
-      ) : flowSection === "countWork" ? (
-        <CountWork />
-      ) : (
-        <OTK />
+      {flowSectionData.map(({ id, name, Component }) =>
+        name === flowSection ? <Component key={id} /> : ""
       )}
     </div>
   );
