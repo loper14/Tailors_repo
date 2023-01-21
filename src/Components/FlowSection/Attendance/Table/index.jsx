@@ -1,11 +1,64 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Wrapper } from "./style";
 import { OrderedListOutlined } from "@ant-design/icons";
 import { Button, Checkbox } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
-const Table = () => {
+import axios from "axios";
+const Table = ({ data: propData, createDate, flowType }) => {
   let navigate = useNavigate();
+  let [data, setData] = useState(propData);
+  let [toggleChange, setToggleChange] = useState(false);
   let { flowDate, flowID } = useParams();
+
+  let updateById = (shouldUpdateDate) => {
+    setData({
+      ...data,
+      data: data.data.map((value) =>
+        value._id === shouldUpdateDate._id
+          ? { ...value, isCome: !value.isCome }
+          : value
+      ),
+    });
+    axios({
+      url: `${process.env.REACT_APP_MAIN_URL}/merchants/update`,
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      data: {
+        createDate: createDate,
+        flowType,
+        shoudUpdateData: shouldUpdateDate,
+        _id: data?._id,
+      },
+    });
+  };
+  let updateAll = (isAllCome) => {
+    setData({
+      ...data,
+      data: data.data.map((value) => {
+        return { ...value, isCome: isAllCome };
+      }),
+      isAllCome,
+    });
+    axios({
+      method: "POST",
+      url: `${process.env.REACT_APP_MAIN_URL}/merchants/update_all_come`,
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      data: {
+        createDate: createDate,
+        flowType,
+        isAllCome: !data?.isAllCome,
+      },
+    });
+  };
+
+  useEffect(() => {
+    setData({ ...data, isAllCome: data?.data?.every((value) => value.isCome) });
+  }, [toggleChange]);
+
   return (
     <Wrapper>
       <Wrapper.Wrap>
@@ -20,23 +73,37 @@ const Table = () => {
                   <OrderedListOutlined />
                 </Wrapper.Th>
                 <Wrapper.Th>
-                  <Checkbox />
+                  <Checkbox
+                    onChange={(e) => updateAll(e.target.checked)}
+                    checked={data?.isAllCome}
+                  />
                 </Wrapper.Th>
                 <Wrapper.Th>Full name</Wrapper.Th>
                 <Wrapper.Th isEnd>Action</Wrapper.Th>
               </Wrapper.Tr>
             </Wrapper.Thead>
             <Wrapper.Tbody>
-              <Wrapper.Tr>
-                <Wrapper.Td>1</Wrapper.Td>
-                <Wrapper.Td>
-                  <Checkbox />
-                </Wrapper.Td>
-                <Wrapper.Td>Alisherov Hamidullo</Wrapper.Td>
-                <Wrapper.Td isEnd>
-                  <Button danger>Delete</Button>
-                </Wrapper.Td>
-              </Wrapper.Tr>
+              {data?.data?.map((value, index) => (
+                <Wrapper.Tr key={value._id}>
+                  <Wrapper.Td>{index + 1}</Wrapper.Td>
+                  <Wrapper.Td>
+                    <Checkbox
+                      onChange={() => {
+                        setToggleChange(!toggleChange);
+                        updateById({
+                          ...value,
+                          isCome: !value.isCome,
+                        });
+                      }}
+                      checked={value.isCome}
+                    />
+                  </Wrapper.Td>
+                  <Wrapper.Td>{value.fullName}</Wrapper.Td>
+                  <Wrapper.Td isEnd>
+                    <Button danger>Delete</Button>
+                  </Wrapper.Td>
+                </Wrapper.Tr>
+              ))}
             </Wrapper.Tbody>
           </Wrapper.Table>
         </Wrapper.TableWrapper>

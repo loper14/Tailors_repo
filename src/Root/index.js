@@ -2,11 +2,8 @@ import React from "react";
 import Login from "../Components/Login";
 import Navbar from "../Components/Navbar";
 import { Routes, Route } from "react-router-dom";
-import Home from "../Pages/Home";
 import NotFound from "../Pages/404";
 import { RequireAuth } from "react-auth-kit";
-import Flow from "../Components/Flow";
-import FlowSection from "../Components/FlowSection";
 import { routeData } from "../Utils/routes";
 
 const Root = () => {

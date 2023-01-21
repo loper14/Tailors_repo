@@ -27,6 +27,7 @@ const Navbar = () => {
           setTimeout(() => {
             navigate("/login");
             signOut();
+            localStorage.clear();
           }, 1200);
         }).catch(() => console.log("Oops errors!"));
       },

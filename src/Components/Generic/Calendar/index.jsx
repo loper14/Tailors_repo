@@ -12,7 +12,7 @@ const Calendar = ({ date, onDayChange }) => {
   let { flowID } = useParams();
   let [paramsDate, setParamsDate] = useState(date.getTime());
   let [showDate, setShowDate] = useState(false);
-  let startDate = 1668970800000;
+  let startDate = 1673290800000;
   let setUpDate = new Date();
   let visibleDate = new Date(
     `${setUpDate.getMonth() + 1}/${
@@ -31,19 +31,6 @@ const Calendar = ({ date, onDayChange }) => {
     setParamsDate(minusDayTime);
     onDayChange(minusDayTime);
   };
-
-  // useEffect(() => {
-  //   axios({
-  //     method: "POST",
-  //     url: `${process.env.REACT_APP_MAIN_URL}/merchants`,
-  //     data: { flowType: flowID, createDate: currentDate },
-  //     headers: {
-  //       Authorization: `${
-  //         auth()._auth_type
-  //       } eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjpbeyJfaWQiOiI2MzdiYTc3OTQ3MzY5ZDAxNjE1MmVmOTAiLCJwYXNzd29yZCI6ImZsb3cxIiwiZnVsbE5hbWUiOiJmbG93MSIsImZsb3dUeXBlIjoiMSJ9XSwiaWF0IjoxNjY5MDQ4NjA2fQ.zCoxl2EXfHNAn9Arzd5oWXAxiMwooYkIIkWjmwj7UU0`,
-  //     },
-  //   }).then((response) => console.log(response));
-  // }, [currentDate]);
 
   return (
     <div>

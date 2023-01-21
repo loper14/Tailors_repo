@@ -1,18 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import Calendar from "../../Generic/Calendar";
 import { Title } from "../../Generic/Style";
 import CountWorkTable from "./CountWorkTable";
 
 const CountWork = () => {
-  let d = new Date();
-  console.log(new Date(`1/1/${d.getFullYear()}`).getTime());
   let { flowDate } = useParams();
+  let [changeDate, setChangeDate] = useState(Number(flowDate));
   let date = new Date(Number(flowDate));
+  let onDayChangeHandler = (time) => {
+    console.log(time);
+  };
   return (
     <div>
       <Title>Count Work</Title>
-      <Calendar date={date} />
+      <Calendar date={date} onDayChange={onDayChangeHandler} />
       <CountWorkTable />
     </div>
   );
