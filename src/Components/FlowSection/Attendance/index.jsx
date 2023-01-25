@@ -7,6 +7,7 @@ import Table from "./Table";
 import axios from "axios";
 import AddModal from "./userModal";
 import { Button } from "antd";
+import TableLoading from "../../Generic/TableLoading";
 
 const Attendance = () => {
   let { flowDate, flowID } = useParams();
@@ -16,8 +17,8 @@ const Attendance = () => {
   let [isOpen, setIsOpen] = useState(false);
   let [data, setData] = useState({});
   let date = new Date(Number(currentDate));
-  const dayChangeHandler = (time) => {
-    setCurrentDate(time);
+  const dayChangeHandler = (prefixTime) => {
+    setCurrentDate(prefixTime);
   };
 
   useEffect(() => {
@@ -52,7 +53,7 @@ const Attendance = () => {
         + Add worker
       </Button>
       {loading ? (
-        "Loading..."
+        <TableLoading count={10} />
       ) : (
         <Table data={data} createDate={currentDate} flowType={flowID} />
       )}

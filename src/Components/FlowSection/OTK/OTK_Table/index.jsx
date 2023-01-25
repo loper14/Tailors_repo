@@ -3,7 +3,7 @@ import React from "react";
 import { Wrapper } from "./style";
 import { OrderedListOutlined } from "@ant-design/icons";
 import { useNavigate, useParams } from "react-router-dom";
-const OTK_TABLE = () => {
+const OTK_TABLE = ({ data }) => {
   let navigate = useNavigate();
   let { flowDate, flowID } = useParams();
   return (
@@ -24,19 +24,20 @@ const OTK_TABLE = () => {
               </Wrapper.Tr>
             </Wrapper.Thead>
             <Wrapper.Tbody>
-              <Wrapper.Tr>
-                <Wrapper.Td>1</Wrapper.Td>
-                <Wrapper.Td>New</Wrapper.Td>
-                <Wrapper.Td isCount>0</Wrapper.Td>
-                <Wrapper.Td isDefect>0</Wrapper.Td>
-                <Wrapper.Td isEnd>
-                  <Button danger>Delete</Button>
-                </Wrapper.Td>
-              </Wrapper.Tr>
+              {data?.data?.map((value, index) => (
+                <Wrapper.Tr key={value._id}>
+                  <Wrapper.Td>{index + 1}</Wrapper.Td>
+                  <Wrapper.Td>{value.productName}</Wrapper.Td>
+                  <Wrapper.Td isCount>{value.things}</Wrapper.Td>
+                  <Wrapper.Td isDefect>{value.fake}</Wrapper.Td>
+                  <Wrapper.Td isEnd>
+                    <Button danger>Delete</Button>
+                  </Wrapper.Td>
+                </Wrapper.Tr>
+              ))}
             </Wrapper.Tbody>
           </Wrapper.Table>
         </Wrapper.TableWrapper>
-        <Button style={{ margin: "25px 0" }}>+ Add product</Button>
       </Wrapper.Wrap>
     </Wrapper>
   );

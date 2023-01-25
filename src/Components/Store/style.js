@@ -5,3 +5,6 @@ export let Wrapper = styled.div`
   align-items: center;
   flex-direction: column;
 `;
+Wrapper.Label = styled.div`
+  margin-top: 15px;
+`;
