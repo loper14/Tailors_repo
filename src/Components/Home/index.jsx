@@ -4,7 +4,7 @@ import { Wrapper } from "./style";
 import reportImg from "../../Assets/images/report.jpg";
 import storeImg from "../../Assets/images/store.jpg";
 import { useNavigate } from "react-router-dom";
-import { Title } from "../Generic/Style";
+import { Title } from "../Generic/Styles";
 const HomeComponent = () => {
   let navigate = useNavigate();
   return (
@@ -58,7 +58,12 @@ const HomeComponent = () => {
       <Wrapper.FlowsContainer>
         {" "}
         <Card onClick={() => navigate("/store")} title="Store" img={storeImg} />
-        <Card title="Report" small={true} img={reportImg} />
+        <Card
+          title="Report"
+          small={true}
+          img={reportImg}
+          onClick={() => navigate("/report")}
+        />
       </Wrapper.FlowsContainer>
     </Wrapper>
   );

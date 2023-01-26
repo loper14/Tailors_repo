@@ -2,7 +2,7 @@ import { Modal } from "antd";
 import axios from "axios";
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import { Wrapper } from "../../../Generic/Style";
+import { Wrapper } from "../../../Generic/Styles";
 
 const AddModal = ({ open, onOk, onCancel }) => {
   let { flowID } = useParams();

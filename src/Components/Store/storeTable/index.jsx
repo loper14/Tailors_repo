@@ -2,7 +2,7 @@ import React from "react";
 import { Wrapper } from "./style";
 import { OrderedListOutlined } from "@ant-design/icons";
 import { Button } from "antd";
-const StoreTable = ({ data }) => {
+const StoreTable = ({ data, disableFunction }) => {
   return (
     <Wrapper>
       <Wrapper.Wrap>
@@ -23,7 +23,7 @@ const StoreTable = ({ data }) => {
                   Count products
                 </Wrapper.Th>
                 <Wrapper.Th isDanger>Sent products</Wrapper.Th>
-                <Wrapper.Th isEnd>Action</Wrapper.Th>
+                {!disableFunction && <Wrapper.Th isEnd>Action</Wrapper.Th>}
               </Wrapper.Tr>
             </Wrapper.Thead>
             <Wrapper.Tbody>
@@ -40,9 +40,11 @@ const StoreTable = ({ data }) => {
                     {value.things}
                   </Wrapper.Td>
                   <Wrapper.Td isDanger>{value.sendedThings}</Wrapper.Td>
-                  <Wrapper.Td isEnd>
-                    <Button danger>Delete</Button>
-                  </Wrapper.Td>
+                  {!disableFunction && (
+                    <Wrapper.Td isEnd>
+                      <Button danger>Delete</Button>
+                    </Wrapper.Td>
+                  )}
                 </Wrapper.Tr>
               ))}
             </Wrapper.Tbody>

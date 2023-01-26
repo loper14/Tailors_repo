@@ -3,7 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Calendar from "../../Generic/Calendar";
-import { Title } from "../../Generic/Style";
+import { Title } from "../../Generic/Styles";
 import TableLoading from "../../Generic/TableLoading";
 import CountWorkTable from "./CountWorkTable";
 import { Wrapper } from "./style";

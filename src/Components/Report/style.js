@@ -1,11 +1,8 @@
 import styled from "styled-components";
 
-export const Wrapper = styled.div`
+export let Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
-`;
-Wrapper.Label = styled.div`
-  margin-top: 20px;
+  justify-content: center;
 `;

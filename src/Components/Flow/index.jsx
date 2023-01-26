@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Wrapper } from "./style";
 import Card from "../../Components/Generic/Card";
 import countWorkImg from "../../Assets/images/countWork.jpg";
-import { Title } from "../Generic/Style";
+import { Title } from "../Generic/Styles";
 const Flow = () => {
   let { flowID } = useParams();
   let navigate = useNavigate();

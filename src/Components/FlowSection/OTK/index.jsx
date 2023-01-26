@@ -1,5 +1,5 @@
 import Calendar from "../../Generic/Calendar";
-import { Title } from "../../Generic/Style";
+import { Title } from "../../Generic/Styles";
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import OTK_TABLE from "./OTK_Table";

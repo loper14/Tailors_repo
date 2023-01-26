@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Wrapper } from "./style";
-import { Title } from "../../Generic/Style";
+import { Title } from "../../Generic/Styles";
 import Calendar from "../../Generic/Calendar";
 import { useNavigate, useParams } from "react-router-dom";
 import Table from "./Table";

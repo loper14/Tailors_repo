@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { DatePicker } from "antd";
 import { Wrapper } from "./style";
-import { Title } from "../Style";
+import { Title } from "../Styles";
 import { ArrowRightOutlined, ArrowLeftOutlined } from "@ant-design/icons";
 const Calendar = ({ date, onDayChange }) => {
   const startDate = process.env.REACT_APP_START_DATE;

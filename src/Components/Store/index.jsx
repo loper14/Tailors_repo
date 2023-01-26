@@ -1,18 +1,17 @@
-import { Button } from "antd";
 import React, { useState } from "react";
-import { Title } from "../Generic/Style";
-import StoreTable from "./storeTable";
 import { Wrapper } from "./style";
-import TableLoading from "../Generic/TableLoading";
-import { useEffect } from "react";
+import { Title } from "../Generic/Styles";
+import { Button } from "antd";
 import axios from "axios";
-import AddProductModal from "./addProductModal";
+import AddStoreProduct from "./AddStoreProduct";
+import { useEffect } from "react";
+import TableLoading from "../Generic/TableLoading";
+import StoreTable from "./storeTable";
 
-const Store = () => {
-  let [data, setData] = useState({});
+const Store = ({ disableFunction }) => {
+  const [data, setData] = useState();
+  let [isOpen, setOpen] = useState(false);
   let [loading, setLoading] = useState(false);
-  let [isOpen, setIsOpen] = useState(false);
-
   useEffect(() => {
     setLoading(true);
     axios({
@@ -21,28 +20,33 @@ const Store = () => {
         Authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     }).then(({ data }) => {
-      setLoading(false);
       setData(data);
+      setLoading(false);
     });
   }, []);
 
   return (
     <Wrapper>
-      <AddProductModal
+      <AddStoreProduct
         open={isOpen}
-        onOk={() => setIsOpen(false)}
-        onCancel={() => setIsOpen(false)}
+        onOk={() => setOpen(false)}
+        onCancel={() => setOpen(false)}
       />
       <Title>Store</Title>
-      {loading ? <TableLoading count={10} /> : <StoreTable data={data} />}
-      <Button
-        onClick={() => setIsOpen(true)}
-        type="primary"
-        style={{ margin: "30px 0" }}
-      >
-        {" "}
-        + Add product
-      </Button>
+      {loading ? (
+        <TableLoading count={10} />
+      ) : (
+        <StoreTable disableFunction={disableFunction} data={data} />
+      )}
+      {!disableFunction && (
+        <Button
+          onClick={() => setOpen(true)}
+          type="primary"
+          style={{ margin: "30px 0" }}
+        >
+          + Add Product
+        </Button>
+      )}
     </Wrapper>
   );
 };
