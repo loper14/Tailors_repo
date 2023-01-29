@@ -72,6 +72,7 @@ const CountWorkTable = ({ data, currentDate }) => {
                         currentDate={currentDate}
                         updateHandler={updateHandler}
                         _id={data._id}
+                        type="fake"
                       />
                     ) : (
                       value.fake
@@ -90,6 +91,7 @@ const CountWorkTable = ({ data, currentDate }) => {
                         currentDate={currentDate}
                         updateHandler={updateHandler}
                         _id={data._id}
+                        type="price"
                       />
                     ) : (
                       value.price

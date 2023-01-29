@@ -6,7 +6,7 @@ import { useParams } from "react-router-dom";
 import { setSelectedData } from "../../../../../Redux/CountWorkSlice";
 import { Wrapper } from "../TextInput/style";
 
-const NumberInput = ({ updateHandler, _id, currentDate }) => {
+const NumberInput = ({ type, updateHandler, _id, currentDate }) => {
   let { flowID } = useParams();
   let dispatch = useDispatch();
   let { selectedData } = useSelector((state) => state.countWork);
@@ -15,12 +15,19 @@ const NumberInput = ({ updateHandler, _id, currentDate }) => {
   };
 
   let onChange = (e) => {
-    dispatch(
-      setSelectedData({
-        ...selectedData,
-        fake: e.target.value,
-      })
-    );
+    type === "fake"
+      ? dispatch(
+          setSelectedData({
+            ...selectedData,
+            fake: +e.target.value,
+          })
+        )
+      : dispatch(
+          setSelectedData({
+            ...selectedData,
+            price: +e.target.value,
+          })
+        );
   };
 
   let onSave = () => {
@@ -38,7 +45,7 @@ const NumberInput = ({ updateHandler, _id, currentDate }) => {
         shoudUpdateData: selectedData,
         _id,
       },
-    }).then((res) => console.log(res));
+    });
   };
 
   return (
@@ -46,26 +53,44 @@ const NumberInput = ({ updateHandler, _id, currentDate }) => {
       <Wrapper.InputContainer>
         <Button
           onClick={() =>
-            dispatch(
-              setSelectedData({
-                ...selectedData,
-                fake: selectedData.fake - 1,
-              })
-            )
+            type === "fake"
+              ? dispatch(
+                  setSelectedData({
+                    ...selectedData,
+                    fake: selectedData.fake - 1,
+                  })
+                )
+              : dispatch(
+                  setSelectedData({
+                    ...selectedData,
+                    price: selectedData.price - 1,
+                  })
+                )
           }
           danger
         >
           -
         </Button>
-        <Input onChange={onChange} value={selectedData.fake} type="number" />
+        <Input
+          onChange={onChange}
+          value={type === "fake" ? selectedData.fake : selectedData.price}
+          type="number"
+        />
         <Button
           onClick={() =>
-            dispatch(
-              setSelectedData({
-                ...selectedData,
-                fake: selectedData.fake + 1,
-              })
-            )
+            type === "fake"
+              ? dispatch(
+                  setSelectedData({
+                    ...selectedData,
+                    fake: selectedData.fake + 1,
+                  })
+                )
+              : dispatch(
+                  setSelectedData({
+                    ...selectedData,
+                    price: selectedData.price + 1,
+                  })
+                )
           }
         >
           +
