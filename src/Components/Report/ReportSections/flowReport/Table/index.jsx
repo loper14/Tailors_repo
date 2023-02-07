@@ -14,9 +14,11 @@ import {
 import { Button } from "antd";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const Table = ({ data, date }) => {
   let navigate = useNavigate();
+  let [barData, setBarData] = useState();
   let [showBar, setShowBar] = useState({ show: false, active: null });
   const chartData = [
     {
@@ -28,6 +30,18 @@ const Table = ({ data, date }) => {
       statistics: 0,
     },
   ];
+  useEffect(() => {
+    let selectedData = data[showBar?.active]?.data;
+    if (selectedData) {
+      let keys = Object.keys(selectedData);
+      setBarData(
+        keys.map((value) => ({
+          name: value,
+          statistics: selectedData[value],
+        }))
+      );
+    }
+  }, [showBar?.active]);
 
   return (
     <>
@@ -45,17 +59,15 @@ const Table = ({ data, date }) => {
             </TableContainer.Tr>
           </TableContainer.Thead>
           <TableContainer.Tbody>
-            {data.map((value, index) => {
+            {data?.map((value, index) => {
               return (
-                <TableContainer.Tr key={value.id}>
+                <TableContainer.Tr key={index}>
                   <TableContainer.Td>{index + 1}</TableContainer.Td>
                   <TableContainer.Td>{value.name}</TableContainer.Td>
                   <TableContainer.Td defect>
                     {value.data.fake}
                   </TableContainer.Td>
-                  <TableContainer.Td>
-                    {value.data.totalPrice} so'm
-                  </TableContainer.Td>
+                  <TableContainer.Td>{value.data.price} so'm</TableContainer.Td>
                   <TableContainer.Td isEnd>
                     <Button
                       onClick={() =>
@@ -94,7 +106,7 @@ const Table = ({ data, date }) => {
           <BarChart
             width={350}
             height={300}
-            data={chartData}
+            data={barData}
             margin={{
               top: 5,
               right: 30,
@@ -115,7 +127,7 @@ const Table = ({ data, date }) => {
             <Bar
               dataKey="statistics"
               fill="#231ad3"
-              background={{ fill: "#5576a0" }}
+              background={{ fill: "#afb5bd" }}
             />
           </BarChart>
         </>

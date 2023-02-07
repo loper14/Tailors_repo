@@ -21,6 +21,12 @@ const CountWorkTable = ({ data, currentDate }) => {
     });
   };
 
+  let onDoubleClick = (value, doubleType) => {
+    if (doubleType === selectType || !value.isCome) return;
+    dispatch(setSelectedData(value));
+    setSelectType(doubleType);
+  };
+
   return (
     <Wrapper>
       <Wrapper.Wrap>
@@ -43,10 +49,7 @@ const CountWorkTable = ({ data, currentDate }) => {
                 <Wrapper.Tr key={value._id}>
                   <Wrapper.Td isDanger={!value.isCome}>{index + 1}</Wrapper.Td>
                   <Wrapper.Td
-                    onDoubleClick={() => {
-                      dispatch(setSelectedData(value));
-                      setSelectType("fullName");
-                    }}
+                    onDoubleClick={() => onDoubleClick(value, "fullName")}
                     isDanger={!value.isCome}
                   >
                     {selectedData._id === value._id &&
@@ -62,10 +65,7 @@ const CountWorkTable = ({ data, currentDate }) => {
                   </Wrapper.Td>
                   <Wrapper.Td
                     isDanger
-                    onDoubleClick={() => {
-                      dispatch(setSelectedData(value));
-                      setSelectType("fake");
-                    }}
+                    onDoubleClick={() => onDoubleClick(value, "fake")}
                   >
                     {selectedData._id === value._id && selectType === "fake" ? (
                       <NumberInput
@@ -80,10 +80,7 @@ const CountWorkTable = ({ data, currentDate }) => {
                   </Wrapper.Td>
                   <Wrapper.Td
                     isDanger={!value.isCome}
-                    onDoubleClick={() => {
-                      dispatch(setSelectedData(value));
-                      setSelectType("price");
-                    }}
+                    onDoubleClick={() => onDoubleClick(value, "price")}
                   >
                     {selectedData._id === value._id &&
                     selectType === "price" ? (

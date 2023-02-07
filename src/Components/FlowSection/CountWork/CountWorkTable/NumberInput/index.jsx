@@ -15,19 +15,12 @@ const NumberInput = ({ type, updateHandler, _id, currentDate }) => {
   };
 
   let onChange = (e) => {
-    type === "fake"
-      ? dispatch(
-          setSelectedData({
-            ...selectedData,
-            fake: +e.target.value,
-          })
-        )
-      : dispatch(
-          setSelectedData({
-            ...selectedData,
-            price: +e.target.value,
-          })
-        );
+    dispatch(
+      setSelectedData({
+        ...selectedData,
+        [type]: +e.target.value,
+      })
+    );
   };
 
   let onSave = () => {
@@ -48,53 +41,38 @@ const NumberInput = ({ type, updateHandler, _id, currentDate }) => {
     });
   };
 
+  let changeNumInput = (funcType) => {
+    if (funcType === "inc") {
+      dispatch(
+        setSelectedData({
+          ...selectedData,
+          [type]: selectedData[type] + 1,
+        })
+      );
+    } else if (funcType === "dec" && selectedData[type] > 0) {
+      dispatch(
+        setSelectedData({
+          ...selectedData,
+          [type]: selectedData[type] - 1,
+        })
+      );
+    }
+  };
+
   return (
     <Wrapper>
       <Wrapper.InputContainer>
-        <Button
-          onClick={() =>
-            type === "fake"
-              ? dispatch(
-                  setSelectedData({
-                    ...selectedData,
-                    fake: selectedData.fake - 1,
-                  })
-                )
-              : dispatch(
-                  setSelectedData({
-                    ...selectedData,
-                    price: selectedData.price - 1,
-                  })
-                )
-          }
-          danger
-        >
+        <Button onClick={() => changeNumInput("dec")} danger>
           -
         </Button>
         <Input
           onChange={onChange}
-          value={type === "fake" ? selectedData.fake : selectedData.price}
+          onKeyDown={(e) => (e.key === "Enter" || e.key === 13) && onSave()}
+          value={selectedData[type]}
           type="number"
+          min={0}
         />
-        <Button
-          onClick={() =>
-            type === "fake"
-              ? dispatch(
-                  setSelectedData({
-                    ...selectedData,
-                    fake: selectedData.fake + 1,
-                  })
-                )
-              : dispatch(
-                  setSelectedData({
-                    ...selectedData,
-                    price: selectedData.price + 1,
-                  })
-                )
-          }
-        >
-          +
-        </Button>
+        <Button onClick={() => changeNumInput("inc")}>+</Button>
       </Wrapper.InputContainer>
       <Wrapper.ButtonsContainer>
         <Button type="primary" onClick={onSave}>

@@ -38,8 +38,10 @@ Wrapper.Th = styled.th`
   border-right: ${({ isEnd }) =>
     !isEnd ? "1px solid rgb(240, 240, 240)" : ""};
   font-weight: bold;
-  color: ${({ isDanger }) => (isDanger ? "rgb(211, 56, 13)" : "")};
-  background: ${({ isDanger }) => (isDanger ? "rgb(255, 241, 232)" : "")};
+  color: ${({ isDanger, isCount }) =>
+    isDanger ? "rgb(211, 56, 13)" : isCount ? "rgb(57, 158, 14)" : ""};
+  background: ${({ isDanger, isCount }) =>
+    isDanger ? "rgb(255, 241, 232)" : isCount ? "rgb(246, 255, 236)" : ""};
   white-space: nowrap;
 `;
 Wrapper.Td = styled.td`
@@ -47,6 +49,8 @@ Wrapper.Td = styled.td`
   border-right: ${({ isEnd }) =>
     !isEnd ? "1px solid rgb(240, 240, 240)" : ""};
   white-space: nowrap;
-  color: ${({ isDanger }) => (isDanger ? "rgb(211, 56, 13)" : "")};
-  background: ${({ isDanger }) => (isDanger ? "rgb(255, 241, 232)" : "")};
+  color: ${({ isDanger, isCount }) =>
+    isDanger ? "rgb(211, 56, 13)" : isCount ? "rgb(57, 158, 14)" : ""};
+  background: ${({ isDanger, isCount }) =>
+    isDanger ? "rgb(255, 241, 232)" : isCount ? "rgb(246, 255, 236)" : ""};
 `;
