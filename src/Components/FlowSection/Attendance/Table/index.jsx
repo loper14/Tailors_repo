@@ -56,6 +56,22 @@ const Table = ({ data: propData, createDate, flowType, open }) => {
     setData({ ...data, isAllCome: data?.data?.every((value) => value.isCome) });
   }, [toggleChange]);
 
+  let deleteMerchant = (id) => {
+    setData({ ...data, data: data.data.filter((value) => value._id !== id) });
+    axios({
+      method: "POST",
+      url: `${process.env.REACT_APP_MAIN_URL}/merchants/delete_user`,
+      data: {
+        createDate: createDate,
+        flowType,
+        idUsers: [id],
+      },
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
+  };
+
   return (
     <Wrapper>
       <Wrapper.Wrap>
@@ -94,7 +110,9 @@ const Table = ({ data: propData, createDate, flowType, open }) => {
                   </Wrapper.Td>
                   <Wrapper.Td>{value.fullName}</Wrapper.Td>
                   <Wrapper.Td isEnd>
-                    <Button danger>Delete</Button>
+                    <Button onClick={() => deleteMerchant(value._id)} danger>
+                      Deletting
+                    </Button>
                   </Wrapper.Td>
                 </Wrapper.Tr>
               ))}
