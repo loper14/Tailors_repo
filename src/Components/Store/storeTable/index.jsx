@@ -16,6 +16,7 @@ const StoreTable = ({
   deleteStorePr,
   updateHandler,
 }) => {
+  console.log(data);
   let { storeSelectedData } = useSelector((state) => state.countWork);
   let [selectType, setSelectType] = useState("");
   let [oldData, setOldData] = useState();

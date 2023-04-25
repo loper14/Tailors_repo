@@ -5,6 +5,7 @@ let countWorkSlice = createSlice({
   initialState: {
     selectedData: {},
     storeSelectedData: {},
+    otkSelectedData: {},
   },
   reducers: {
     setSelectedData(state, action) {
@@ -13,7 +14,11 @@ let countWorkSlice = createSlice({
     setStoreSelectedData(state, action) {
       state.storeSelectedData = action.payload;
     },
+    setOtkSelectedData(state, action) {
+      state.otkSelectedData = action.payload;
+    },
   },
 });
 export default countWorkSlice.reducer;
-export let { setSelectedData, setStoreSelectedData } = countWorkSlice.actions;
+export let { setSelectedData, setStoreSelectedData, setOtkSelectedData } =
+  countWorkSlice.actions;

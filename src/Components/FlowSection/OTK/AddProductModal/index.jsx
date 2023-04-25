@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Wrapper } from "../style";
 
-const AddProductModal = ({ open, onOk, onCancel, currentDate }) => {
+const AddProductModal = ({ open, onOk, onCancel, currentDate, onAdd }) => {
   let { flowID } = useParams();
   let [productInfo, setProductInfo] = useState({ title: "" });
 
@@ -21,6 +21,11 @@ const AddProductModal = ({ open, onOk, onCancel, currentDate }) => {
         flowType: flowID,
         productName: productInfo.title,
       },
+    }).then((res) => {
+      onOk();
+      let addData = res.data.data;
+      onAdd(addData[0].data[addData.length - 1]);
+      setProductInfo({ title: "" });
     });
   };
 
